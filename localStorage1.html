@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function counter()
+{
+	if(localStorage.getItem("count") == null)
+	{
+		//for first time
+		localStorage.setItem("count", 1);
+	}
+	else
+	{
+		//getting count value, adding one to it & setting it again with new count value
+		var c = localStorage.getItem("count");
+		c++;
+		localStorage.setItem("count", c);
+		alert("This file has loaded "+localStorage.getItem("count")+" times");
+	}
+}
+</script>
+</head>
+<body onload="counter()">
+<h1>Local Storage 1</h1>
+<h3 id="result"></h3><br/>
+<form>
+Enter your city name : <input type="text" id="cityName"> 
+<button onclick="set()">Submit</button>
+</form><br/>
+<a href="localStorage2.html" target="_blank">Click</a> for next file. The next file will also display the same city name. Everytime you change the city name in this file, it is reflected in the second file.
+<script>
+//checks if localStorage city is set then displays that, else just displays welcome
+if(localStorage.getItem("city")== null)
+{
+	document.getElementById("result").innerHTML = "Welcome";
+}
+else
+{
+	document.getElementById("result").innerHTML = "Welcome to "+localStorage.getItem("city");
+}	
+
+function set()
+{
+	// Check browser support
+	if (typeof(Storage) !== "undefined") {
+		// Store
+		localStorage.setItem("city", document.getElementById("cityName").value);
+		// Retrieve
+		document.getElementById("result").innerHTML = "Welcome to "+localStorage.getItem("city");
+	} else {
+		document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+	}
+}
+</script>
+
+</body>
+</html>
+
